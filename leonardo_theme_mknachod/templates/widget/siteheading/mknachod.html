@@ -1,0 +1,12 @@
+{% extends widget.get_base_template %}
+
+{% block content %}
+
+<a href="/">
+<img class="toolbar-image" src="http://localhost:8000/static/img/logo.png">
+</a>
+<a href="/">
+<h1 id="toolbar-heading">{{ widget.site_title }}</h1>
+</a>
+{{ widget.tagline }}
+{% endblock %}

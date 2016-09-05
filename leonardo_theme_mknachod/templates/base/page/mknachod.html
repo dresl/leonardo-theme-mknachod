@@ -8,7 +8,7 @@
     {% include "_header.html" %}
     {% analytical_head_bottom %}
   </head>
-  <body id="{% block body_id %}main_content{% endblock %}" data-spy="scroll" data-target=".navbar-fixed-top" ng-app='horizon.app' ng-strict-di class="">
+  <body id="{% block body_id %}main_content{% endblock %}" data-spy="scroll" data-target=".navbar-static-top" ng-app='horizon.app' ng-strict-di class="">
     <noscript>
       <div class="javascript_disabled_alert">
         {% trans "This application requires JavaScript to be enabled in your web browser." %}
@@ -17,15 +17,13 @@
     {% analytical_body_top %}
     {% include "horizon/_messages.html" %}
     {% if feincms_page.layout == "boxed" %}
-    <div class="container">
+    <div class="container toolbar-background">
       {% feincms_render_region feincms_page "toolbar" request %}
     </div>
-    <nav class="navbar navbar-default main-navbar-static" role="navigation">
-      <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
         {% feincms_render_region feincms_page "header" request %}
-      </div>
     </nav>
-    <div class="container">
+    <div class="container bg-mknachod">
     {% feincms_render_region feincms_page "col3" request %}
     {% render_region_tools feincms_page "col3" request %}
     </div>
