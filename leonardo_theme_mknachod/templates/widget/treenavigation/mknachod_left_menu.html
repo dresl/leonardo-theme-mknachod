@@ -1,0 +1,27 @@
+{% extends widget.get_base_template %}
+
+{% load feincms_page_tags %}
+
+{% block content %}
+{% feincms_nav root level=level depth=1 as toplevel %}
+<div class="panel-group" id="accordion">
+  {% for page in toplevel %}
+  {% feincms_nav page level=level2 depth=1 as sublevel %}
+  <div class="panel panel-default">
+    <a data-toggle="collapse" data-parent="#accordion" href="#{{ page.slug }}">
+      <div class="panel-heading" style="border-bottom: 2px solid {% cycle '#F0542B' '#82B421' '#C4C4C4' %}">
+        <h4 class="panel-title">
+          <span>{{ page.title }}</span><span class="pull-right"><i class="fa fa-angle-double-down" style="color: {% cycle '#F0542B' '#82B421' '#C4C4C4' %}" aria-hidden="true"></i></span>
+        </h4>
+      </div>
+    </a>
+    <div id="{{ page.slug }}" class="panel-collapse collapse">
+    {% for subpage in sublevel %}
+      <a href="{{ subpage.get_navigation_url }}" style="color: #2b2b2b"><div class="panel-body">{{ subpage.title }}<span class="pull-right"><i class="fa fa-square" style="font-size: 10px; color: {% if page.slug == 'pro-deti' %}#F0542B{% elif page.slug == 'pro-dospele' %}#82B421{% elif page.slug == 'studovna-citarna' %}#C4C4C4{% endif %};" aria-hidden="true"></i></span></div></a>
+    {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
