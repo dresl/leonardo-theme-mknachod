@@ -26,6 +26,11 @@ body {
     background: rgba(255,255,255,0.8);
 }
 
+.panel.box.box-solid {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 0px;
+}
+
 // navbar
 
 .navbar.navbar-default.navbar-static-top {
@@ -52,6 +57,7 @@ body {
 .toolbar-background {
     height: 170px;
     margin: auto;
+    width: 1117px;
     overflow: hidden;
     background: rgba(255,255,255,0.8);
 }
