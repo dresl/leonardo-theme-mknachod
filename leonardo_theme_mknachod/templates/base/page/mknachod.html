@@ -24,8 +24,14 @@
         {% feincms_render_region feincms_page "header" request %}
     </nav>
     <div class="container">
-    {% feincms_render_region feincms_page "col3" request %}
-    {% render_region_tools feincms_page "col3" request %}
+      <div class="col-xs-3" style="padding: 0">
+        {% feincms_render_region feincms_page "col1" request %}
+        {% render_region_tools feincms_page "col1" request %}
+      </div>
+      <div class="col-xs-9" style="padding: 0">
+      {% feincms_render_region feincms_page "col3" request %}
+      {% render_region_tools feincms_page "col3" request %}
+      </div>
     </div>
     {% else %}
     <section class="container content-section text-center">
