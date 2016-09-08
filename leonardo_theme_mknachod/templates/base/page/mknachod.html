@@ -23,7 +23,7 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         {% feincms_render_region feincms_page "header" request %}
     </nav>
-    <div class="container">
+    <div class="container bg-mknachod">
       <div class="col-xs-3" style="padding: 0">
         {% feincms_render_region feincms_page "col1" request %}
         {% render_region_tools feincms_page "col1" request %}
@@ -31,6 +31,12 @@
       <div class="col-xs-9" style="padding: 0">
       {% feincms_render_region feincms_page "col3" request %}
       {% render_region_tools feincms_page "col3" request %}
+      </div>
+    </div>
+    <div class="container bg-mknachod">
+      <div class="col-xs-12">
+        {% feincms_render_region feincms_page "col2" request %}
+        {% render_region_tools feincms_page "col2" request %}
       </div>
     </div>
     {% else %}
