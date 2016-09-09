@@ -36,8 +36,12 @@ a:hover, a:focus {
     border-radius: 0px;
 }
 
-#accordion .panel.panel-default a .panel-heading {
-    padding: 6px 14px;    
+#accordion .panel.panel-default {
+    background-color: transparent;
+    border-color: transparent;
+    a .panel-heading {
+        padding: 6px 14px;
+    }
 }
 
 .panel-collapse.collapse a .panel-body {
@@ -51,7 +55,7 @@ a:hover, a:focus {
 }
 
 .panel-title {
-    color: #353535;
+    color: #565656;
 }
 
 .col-xs-12.col-xs-offset-0 {
@@ -125,6 +129,12 @@ a:hover, a:focus {
             border-radius: 3px;
         }
     }
+}
+
+// left menu
+
+.template-mknachod_left_menu.treenavigation-content-mknachod_left_menu .panel-group {
+    margin-top: 21px;
 }
 
 // toolbar
