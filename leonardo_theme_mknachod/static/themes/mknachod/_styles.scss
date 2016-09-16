@@ -69,18 +69,25 @@ a:hover, a:focus {
     border-color: #195EB0;
     margin: 0;
     height: 51px;
-    .navbar-nav > li > a {
-        color: #fff;
-        margin-top: -1px;
-        padding-top: 16px;
+    .navbar-nav {
+        margin-bottom: -5px;
+        > li > a {
+            color: #fff;
+            margin-top: 0px;
+            padding: 15px 30.2px;
+        }
     }
     .navbar-nav > .active > a {
         background-color: #3270B9;
     }
 }
 
-.navbar-collapse.collapse.in {
-    background-color: rgba(25, 94, 176, 0.9);
+.navbar-collapse.collapse {
+    display: inline-block!important;
+    margin-bottom: 0px;
+    &.in {
+        background-color: rgba(25, 94, 176, 0.9);
+    }
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {

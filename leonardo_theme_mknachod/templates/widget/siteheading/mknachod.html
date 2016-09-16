@@ -1,9 +1,10 @@
 {% extends widget.get_base_template %}
+{% load staticfiles %}
 
 {% block content %}
 
 <a href="/">
-<img class="toolbar-image" src="http://localhost:8000/static/img/logo.png">
+<img class="toolbar-image" src="{% static 'img/logo.png' %}">
 </a>
 <a href="/">
 <h1 id="toolbar-heading">{{ widget.site_title }}</h1>
