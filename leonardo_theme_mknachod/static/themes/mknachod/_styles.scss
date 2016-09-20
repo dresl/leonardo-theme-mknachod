@@ -126,16 +126,26 @@ a:hover, a:focus {
 .navbar-nav > li > .dropdown-menu {
     text-align: center;
     margin-top: -1px;
+    padding: 0;
     li {
         display: block;
         a {
             font-size: 16px;
+            padding: 7px 38px;
         }
         a:hover {
             background-color: #add6f9;
             border-radius: 3px;
         }
     }
+}
+
+.nav > li.dropdown.open { position: static; }
+.nav > li.dropdown.open .dropdown-menu {display:table; width: 100%; text-align: center; left:0; right:0; }
+.dropdown-menu>li { display: table-cell; }
+
+.navbar-nav > li > .dropdown-menu li {
+    display: inline-block;
 }
 
 // left menu
