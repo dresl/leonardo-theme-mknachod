@@ -82,6 +82,14 @@ a:hover, a:focus {
     }
 }
 
+.nav.navbar-nav {
+    text-align: center;
+    display: inline-block;
+    left: 0;
+    right: 0;
+    float: none;
+}
+
 .navbar-collapse.collapse {
     margin-bottom: 0px;
     &.in {
