@@ -40,7 +40,7 @@ a:hover, a:focus {
     background-color: transparent;
     border-color: transparent;
     a .panel-heading {
-        padding: 6px 14px;
+        padding: 5px 14px;
     }
 }
 
@@ -103,6 +103,15 @@ a:hover, a:focus {
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     background-color: #3270B9;
+}
+
+.container.bg-mknachod .leonardo-region .col-xs-10.col-xs-offset-0 {
+    padding-left: 0;
+    padding-right: 31px;
+}
+
+.container-fluid {
+    padding-left: 10px;
 }
 
 // dropdown menu
