@@ -2,19 +2,21 @@
 {% load thumbnail i18n staticfiles %}
 
 {% block content %}
-<script type="text/javascript">
-leonardo.utils.loadResource({src:"{% static 'js/moment.min.js' 'js/fullcalendar.min.js' %}",callback: function(){
+<link href="{% static 'css/fullcalendar.print.css' %}" rel='stylesheet' media='print' />
+<script>
+
     $(document).ready(function() {
         
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay,listWeek'
+                right: 'month,basicWeek,basicDay'
             },
             defaultDate: '2016-09-12',
             navLinks: true, // can click day/week names to navigate views
             editable: true,
+            firstDay: 1,
             eventLimit: true, // allow "more" link when too many events
             events: [
                 {
@@ -75,7 +77,7 @@ leonardo.utils.loadResource({src:"{% static 'js/moment.min.js' 'js/fullcalendar.
         });
         
     });
-}});
+
 </script>
 <div id='calendar'></div>
 {% endblock content %}
