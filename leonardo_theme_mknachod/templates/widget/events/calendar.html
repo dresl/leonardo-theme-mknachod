@@ -14,18 +14,53 @@
     z-index: 9999;
     display: none;
 }
+
+/* fullcalendar */
+
+div#calendar.calendar-small {
+    height: 328px!important;
+    margin-top: 20px!important;
+}
+
+div#calendar.calendar-small .fc-event {
+    height: 1px!important;
+}
+
+div#calendar.calendar-small .fc-row.fc-widget-header {
+    border-right-width: 0px!important;
+    margin-right: 0px!important;
+}
+
+div#calendar.calendar-small .fc-scroller.fc-day-grid-container {
+    overflow-y: hidden!important;
+    height: 246px!important;
+}
+
+div#calendar.calendar-small .fc-row.fc-week.fc-widget-content.fc-rigid {
+    height: 41px!important;
+}
+
+div#calendar.calendar-small .fc-basic-view .fc-body .fc-row {
+    min-height: 0!important;
+}
+
 </style>
 <script>
     $(document).ready(function() {
 
         if ($('#calendar').width() < 500){
-            function myFunction() {
+            function SmallTitleOfCalendar() {
                 var list = document.getElementsByClassName("fc-center")[0];
                 list.getElementsByTagName("H2")[0].style.fontSize="17px";
                 list.getElementsByTagName("H2")[0].style.marginTop="7px";
             }
+            function DetectContainerCalendar() {
+                var selected_div = document.getElementById('calendar');
+                selected_div.classList.add('calendar-small');
+            }
             window.onload = function () {
-                myFunction();
+                DetectContainerCalendar();
+                SmallTitleOfCalendar();
             }
             $('#calendar').fullCalendar({
                 header: {
@@ -40,11 +75,9 @@
                 eventMouseover: function (calEvent, jsEvent, view) {
 
                     $(".bubble").html(
-                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>" +
-                            "<p>Začátek:195EB0 " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
-                            "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
+                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>"
                             );
-                    $(".bubble").css({ top: jsEvent.pageY - 200, left: jsEvent.pageX - 650}).show(200);
+                    $(".bubble").css({ top: jsEvent.pageY - 350, left: jsEvent.pageX - 400}).show(200);
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
@@ -57,9 +90,11 @@
                 events: [
                 {% for item in widget.items %}
                     {
+                        title: '{{ item.translation.name|default:item.name }} jeste {{ item.categories.get.slug }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
                         description: 'This is a cool event',
+                        color: "{% if item.categories.get.slug == 'pro-deti' %}#F0542B{% elif item.categories.get.slug == 'pro-dospele' %}#82B421{% elif item.categories.get.slug == 'pro-vsechny' %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
                 {% endfor %}
@@ -107,5 +142,4 @@
 </script>
 <div class="bubble"></div>
 <div id='calendar'></div>
-
 {% endblock %}
