@@ -90,7 +90,7 @@ div#calendar.calendar-small .fc-basic-view .fc-body .fc-row {
                 events: [
                 {% for item in widget.items %}
                     {
-                        title: '{{ item.translation.name|default:item.name }} jeste {{ item.categories.get.slug }}',
+                        title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
                         description: 'This is a cool event',
@@ -125,7 +125,7 @@ div#calendar.calendar-small .fc-basic-view .fc-body .fc-row {
                 events: [
                 {% for item in widget.items %}
                     {
-                        title: '{{ item.translation.name|default:item.name }} jeste {{ item.categories.get.slug }}',
+                        title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
                         description: 'This is a cool event',
