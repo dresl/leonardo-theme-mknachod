@@ -37,6 +37,10 @@ a:hover, a:focus {
     border-radius: 0px;
 }
 
+textarea {
+    resize: vertical;
+}
+
 #accordion .panel.panel-default {
     background-color: transparent;
     border-color: transparent;
