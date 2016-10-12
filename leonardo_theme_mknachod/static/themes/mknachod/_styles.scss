@@ -75,6 +75,22 @@ textarea {
     padding-left: 10px;
 }
 
+// smartphones
+
+@media only screen and (max-width: 760px) {
+    .container.toolbar-background {
+        width: 100%;
+    }
+
+    #toolbar-heading {
+        left: 290px!important;
+    }
+}
+
+.navbar-form.autocomplete-me.ng-pristine {
+    float: right!important;
+}
+
 // dropdown menu
 
 .navbar-nav > li > .dropdown-menu {

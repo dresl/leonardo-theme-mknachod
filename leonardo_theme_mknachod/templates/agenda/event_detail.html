@@ -16,7 +16,7 @@
     <p><strong>Trvání akce od {{ object.start_time }}{% if object.end_time %} do {{ object.end_time }}{% endif %}</strong></p>
     {% if object.picture %}
     <div class="col-xs-5">
-        <a class="thumbnail" href="{{ object.picture.url }}" data-title="{{ object.picture.name }}" data-footer="{{ object.picture.name }}" data-toggle="lightbox" rel="{{ object.picture.id }}">
+        <a href="{{ object.picture.url }}" data-title="{{ object.picture.name }}" data-footer="{{ object.picture.name }}" data-toggle="lightbox" rel="{{ object.picture.id }}">
             <img class="img-responsive" src="{{ object.picture.url }}" alt="" style="float:right" />
         </a>
     </div>
