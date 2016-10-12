@@ -101,7 +101,7 @@ div#calendar.calendar-small .fc-toolbar {
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
                         description: 'This is a cool event',
-                        color: "{% if item.categories.get.slug == 'pro-deti' %}#F0542B{% elif item.categories.get.slug == 'pro-dospele' %}#82B421{% elif item.categories.get.slug == 'pro-vsechny' %}#195EB0{%endif%}",
+                        color: "{% if item.categories.get.slug == 'pro-deti' %}#F0542B{% elif item.categories.get.slug == 'pro-dospele' %}#82B421{% elif 'pro-vsechny' in item.categories.all %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
                 {% endfor %}
@@ -136,7 +136,7 @@ div#calendar.calendar-small .fc-toolbar {
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
                         description: 'This is a cool event',
-                        color: "{% if item.categories.get.slug == 'pro-deti' %}#F0542B{% elif item.categories.get.slug == 'pro-dospele' %}#82B421{% elif item.categories.get.slug == 'pro-vsechny' %}#195EB0{%endif%}",
+                        color: "{% for obj in item.categories.all %}{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}{% endfor %}",
                         url: '{{ item.get_absolute_url }}',
                     },
                 {% endfor %}
