@@ -7,6 +7,7 @@
     position: absolute;
     width: auto;
     height: auto;
+    min-width: 380px;
     padding: 16px;
     border: 1px solid #666;
     border-radius: 3px;
@@ -82,7 +83,9 @@ div#calendar.calendar-small .fc-toolbar {
                 eventMouseover: function (calEvent, jsEvent, view) {
 
                     $(".bubble").html(
-                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>"
+                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>" +
+                            "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
+                            "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
                             );
                     $(".bubble").css({ top: jsEvent.pageY - 350, left: jsEvent.pageX - 400}).show(200);
                 },
@@ -129,6 +132,9 @@ div#calendar.calendar-small .fc-toolbar {
                     $(".bubble").hide();
                 },
                 eventLimit: true, // allow "more" link when too many events
+                eventRender: function (event, element) {
+                    element.find('span.fc-title').html(element.find('span.fc-title').text());
+                },
                 events: [
                 {% for item in widget.items %}
                     {
