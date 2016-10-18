@@ -1,0 +1,16 @@
+{% extends widget.get_base_template %}
+{% load i18n thumbnail %}
+{% load leonardo_tags %}
+
+{% block content %}
+{% for item in widget.items reversed %}
+<div class="row">
+    <div class="col-xs-12">
+        <a href="{{ item.get_absolute_url }}"><h3 class="pripravovane_akce_heading">{{ item.name }}<small class="small_text">{{ item.start_time|date:"SHORT_DATE_FORMAT" }}</small></h3></a>
+        <p>{{ item.translation.short_description|default:item.short_description|safe }}</p>
+        <a class="btn btn-default" href="{{ item.get_absolute_url }}">Číst více</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

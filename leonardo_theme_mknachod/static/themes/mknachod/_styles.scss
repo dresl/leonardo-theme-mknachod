@@ -15,7 +15,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 0;
     padding: 0;
 }
@@ -75,6 +75,29 @@ textarea {
     padding-left: 10px;
 }
 
+ul {
+    list-style: inherit;
+}
+
+.small_text {
+    float: right;
+    margin-top: 8px;
+    color: #8e8e8e;
+}
+
+a {
+    .pripravovane_akce_heading {
+        transition: all 0.5s ease;
+    }
+    &:hover .pripravovane_akce_heading {
+        color: #195eb0;
+    }
+}
+
+.padding_bottom {
+    padding-bottom: 40px!important;
+}
+
 // smartphones
 
 @media only screen and (max-width: 760px) {
@@ -84,6 +107,10 @@ textarea {
 
     #toolbar-heading {
         left: 290px!important;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #cecece;
     }
 }
 

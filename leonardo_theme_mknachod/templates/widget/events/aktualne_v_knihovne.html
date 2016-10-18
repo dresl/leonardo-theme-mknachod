@@ -2,7 +2,7 @@
 {% load i18n thumbnail %}
 
 {% block content %}
-    {% for item in widget.items %}
+    {% for item in widget.items reversed %}
         <a href="{{ item.get_absolute_url }}">
             <div class="col-xs-4 aktual_knihovna">
                 {% if item.picture %}<img class="img-responsive" style="max-height: 150px; max-width: 190px;" src="{{ item.picture.url }}" alt="" />{% endif %}
