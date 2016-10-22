@@ -1,5 +1,6 @@
 // Vendor Components
 @import "/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -41,10 +42,10 @@ textarea {
     resize: vertical;
 }
 
-.media.novinky {
+.row.novinky {
     background-color: white;
-    padding: 10px;
-    border-radius: 3px;
+    padding: 0 10px 10px 10px;
+    border-radius: 5px;
 }
 
 #accordion .panel.panel-default {
@@ -60,7 +61,7 @@ textarea {
 }
 
 .panel-collapse.collapse a .panel-body {
-    color: #2b2b2b;
+    color: #000000;
     &.active {
         background-color: #efefef;
     }
@@ -89,6 +90,16 @@ ul {
     float: right;
     margin-top: 8px;
     color: #8e8e8e;
+}
+
+.event-img {
+    max-width: 320px;
+    margin: 12px 26px 26px 0;
+}
+
+.event-img-preview {
+    padding-right: 20px;
+    max-height: 184px;
 }
 
 a {
