@@ -1,0 +1,23 @@
+{% extends widget.get_base_template %}
+{% load i18n thumbnail %}
+{% load leonardo_tags %}
+
+{% block content %}
+{% for item in widget.items reversed %}
+<div class="col-xs-6">
+    <h3 class="media-heading">{{ item.name }}</h3>
+    <div class="media novinky">
+        <div class="media-left">
+            <a href="{{ item.get_absolute_url }}">
+              {% if item.picture %}<img class="img-responsive" style="max-height: 150px; max-width: 190px;" src="{{ item.picture.url }}" alt="" />{% endif %}
+            </a>
+        </div>
+        <div class="media-body">
+            <p>{{ item.translation.description|default:item.description|safe|truncatewords:33 }}</p>
+            <a class="btn btn-default pull-right" href="{{ item.get_absolute_url }}">Číst více</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
