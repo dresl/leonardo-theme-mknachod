@@ -123,11 +123,16 @@ a {
     }
 
     #toolbar-heading {
-        left: 290px!important;
+        left: 160px!important;
     }
 
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #cecece;
+    }
+    .toolbar-image {
+        top: 81px!important;
+        width: 170px;
+        left: 0px;
     }
 }
 
