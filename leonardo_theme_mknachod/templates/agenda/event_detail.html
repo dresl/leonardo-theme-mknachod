@@ -14,12 +14,10 @@
 
 <div class="col-xs-12">
     <h2>{{ object.translation.name|default:object.name }}</h2>
-    {% for obj in object.categories.all %}
-    {% if obj.slug == 'novinky-v-knihovne' %}
+    {% if object.categories.get.slug == 'novinky-v-knihovne' %}
     {% else %}
     <p><strong>Trvání akce od {{ object.start_time }}{% if object.end_time %} do {{ object.end_time }}{% endif %}</strong></p>
-    {%endif%}
-    {% endfor %}
+    {% endif %}
     <div class="row">
         <div class="span12">
         {% if object.picture %}
