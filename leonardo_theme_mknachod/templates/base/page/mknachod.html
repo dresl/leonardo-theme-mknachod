@@ -31,6 +31,7 @@
       <div class="col-xs-12 col-md-9" style="padding: 0">
       {% feincms_render_region feincms_page "col3" request %}
       {% render_region_tools feincms_page "col3" request %}
+      {% block body_main %}{% endblock %}
       </div>
     </div>
     {% if request.path == '/' %}
@@ -51,7 +52,6 @@
       <section class="col3 {% get_col_classes feincms_page 'col3' %}">
           {% feincms_render_region feincms_page "col3" request %}
           {% render_region_tools feincms_page "col3" request %}
-        {% block body_main %}{% endblock %}
       </section>
       <!-- <section class="col2 {% get_col_classes feincms_page 'col2' %}">
         {% feincms_render_region feincms_page "col2" request %}
