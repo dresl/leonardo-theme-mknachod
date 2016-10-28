@@ -1,0 +1,27 @@
+{% extends widget.get_base_template %}
+{% load i18n thumbnail %}
+{% load leonardo_tags %}
+
+{% block content %}
+{% for item in widget.items %}
+<div class="col-xs-12">
+    <div class="row novinky">
+        <div class="span12">
+        {% if item.picture %}
+          <a href="{{ item.get_absolute_url }}">
+            <img class="event-img-preview pull-left" src="{{ item.picture.url }}" alt=""/>
+          </a>
+        {% endif %}
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p><br>
+          {% if item.categories.get.slug == 'novinky-v-knihovne' %}
+          {% else %}
+          <p><strong>Trvání akce od {{ item.start_time }}{% if item.end_time %} do {{ item.end_time }}{% endif %}</strong></p>
+          {% endif %}
+          <a class="btn btn-default pull-right" href="{{ item.get_absolute_url }}">Číst více</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

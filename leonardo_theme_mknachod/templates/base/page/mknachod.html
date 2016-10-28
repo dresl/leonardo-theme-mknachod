@@ -16,7 +16,7 @@
     </noscript>
     {% analytical_body_top %}
     {% include "horizon/_messages.html" %}
-    {% if feincms_page.layout == "boxed" %}
+    {% if feincms_page.layout == "boxed" or feincms_page.layout == "fixed" %}
     <div class="container toolbar-background">
       {% feincms_render_region feincms_page "toolbar" request %}
     </div>
@@ -24,16 +24,19 @@
         {% feincms_render_region feincms_page "header" request %}
     </nav>
     <div class="container bg-mknachod">
+      {% if feincms_page.layout == "boxed" %}
       <div class="col-xs-12 col-md-3" style="padding: 0">
         {% feincms_render_region feincms_page "col1" request %}
         {% render_region_tools feincms_page "col1" request %}
       </div>
-      <div class="col-xs-12 col-md-9" style="padding: 0">
+      {% endif %}
+      <div class="{% if feincms_page.layout == 'boxed' %}col-xs-12 col-md-9{% else %}col-xs-12{% endif %}" style="padding: 0">
       {% feincms_render_region feincms_page "col3" request %}
       {% render_region_tools feincms_page "col3" request %}
       {% block body_main %}{% endblock %}
       </div>
     </div>
+    {% if feincms_page.layout == "boxed" %}
     {% if request.path == '/' %}
     <div class="container bg-mknachod">
       <div class="col-xs-12">
@@ -41,6 +44,7 @@
         {% render_region_tools feincms_page "col2" request %}
       </div>
     </div>
+    {% endif %}
     {% endif %}
     {% else %}
     <section class="container content-section text-center">
