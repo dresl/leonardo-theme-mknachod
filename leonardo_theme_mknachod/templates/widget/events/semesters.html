@@ -3,7 +3,7 @@
 {% load leonardo_tags %}
 
 {% block content %}
-{% for item in widget.items %}
+{% for item in widget.items reversed %}
   {% for obj in item.categories.all %}
     {% if obj.slug == '1-semestr' and item.categories.count == 2 %}
     <button type="button" class="btn btn-semestr btn-{{ obj.id }}">1. semestr</button><br>
