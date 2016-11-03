@@ -17,7 +17,7 @@
     </a>
     <div id="{{ page.slug }}" class="panel-collapse collapse {% if page|is_equal_or_parent_of:current %}in{% endif %}">
     {% for subpage in sublevel %}
-      <a href="{{ subpage.get_navigation_url }}" style="color: #2b2b2b"><div class="panel-body {% if subpage|is_equal_or_parent_of:current %}active{% endif %}" style="padding: 8px 31px;{% if subpage|is_equal_or_parent_of:current %}color: {% if page.slug == 'pro-deti' %}#F0542B{% elif page.slug == 'pro-dospele' %}#82B421{% elif page.slug == 'studovna-citarna' %}#797979{% endif %}{% endif %}">{{ subpage.title }}<span class="pull-right"><i class="fa fa-square" style="font-size: 10px; color: {% if page.slug == 'pro-deti' %}#F0542B{% elif page.slug == 'pro-dospele' %}#82B421{% elif page.slug == 'studovna-citarna' %}#797979{% endif %};" aria-hidden="true"></i></span></div></a>
+      <a href="{{ subpage.get_navigation_url }}" style="color: #2b2b2b"><div class="panel-body {% if subpage|is_equal_or_parent_of:current %}active{% endif %}" style="padding: 6px 22px;{% if subpage|is_equal_or_parent_of:current %}color: {% if page.slug == 'pro-deti' %}#F0542B{% elif page.slug == 'pro-dospele' %}#82B421{% elif page.slug == 'studovna-citarna' %}#797979{% endif %}{% endif %}">{{ subpage.title }}<span class="pull-right"><i class="fa fa-square" style="font-size: 10px; color: {% if page.slug == 'pro-deti' %}#F0542B{% elif page.slug == 'pro-dospele' %}#82B421{% elif page.slug == 'studovna-citarna' %}#797979{% endif %};" aria-hidden="true"></i></span></div></a>
     {% endfor %}
     </div>
   </div>

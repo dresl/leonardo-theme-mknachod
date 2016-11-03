@@ -12,7 +12,7 @@
             <img class="event-img-preview pull-left" src="{{ item.picture.url }}" alt=""/>
           </a>
         {% endif %}
-          <h3>{{ item.name }}</h3>
+          <a href="{{ item.get_absolute_url }}"><h3 class="pripravovane_akce_heading">{{ item.name }}</h3></a>
           <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p><br>
           {% if item.categories.get.slug == 'novinky-v-knihovne' %}
           {% else %}
