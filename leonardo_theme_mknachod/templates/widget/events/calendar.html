@@ -87,7 +87,7 @@ div#calendar.calendar-small .fc-toolbar {
                             "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
                             "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
                             );
-                    $(".bubble").css({ top: jsEvent.pageY - 350, left: jsEvent.pageX - 400}).show(200);
+                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(200);
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
@@ -130,7 +130,7 @@ div#calendar.calendar-small .fc-toolbar {
                             "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
                             "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
                             );
-                    $(".bubble").css({ top: jsEvent.pageY - 200, left: jsEvent.pageX - 650}).show(200);
+                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(200);
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
@@ -161,6 +161,5 @@ div#calendar.calendar-small .fc-toolbar {
     });
 
 </script>
-<div class="bubble"></div>
 <div id='calendar'></div>
 {% endblock %}
