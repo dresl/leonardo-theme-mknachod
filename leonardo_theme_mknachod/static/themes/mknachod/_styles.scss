@@ -118,14 +118,18 @@ a {
     border-color: #ffffff;
     font-size: 15px;
     border-radius: 0px;
+    width: 117px;
+    text-align: left;
     &:focus {
         outline: none;
     }
     &:hover:after {
         font-family: fontawesome;
         content: '\f101';
-        margin-left: 25px;
+        margin-left: 18px;
         font-size: 15px;
+        background-color: white;
+        padding: 10px;
     }
 }
 
