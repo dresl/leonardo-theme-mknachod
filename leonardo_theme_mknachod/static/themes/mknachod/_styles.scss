@@ -153,14 +153,25 @@ a {
 }
 
 .btn-catalog {
+    color: white;
     background-color: #195eb0;
     border-color: #357ebd;
     border-radius: 0;
     padding: 8px 31px;
     transition: all 0.3s ease;
     &:hover {
+        color: white;
         background-color: #093b77!important;
     }
+}
+
+.objet-image-neste-template {
+    background: #e0e0e0;
+    clear: both;
+    padding: 4px;
+    border: 1px solid #c1c1c1;
+    border-top: none;
+    cursor: pointer;
 }
 
 .padding_bottom {

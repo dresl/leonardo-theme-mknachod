@@ -1,0 +1,71 @@
+{% extends widget.get_base_template %}
+
+{% load i18n %}
+{% load thumbnail %}
+{% load leonardo_tags %}
+{% block content %}
+<style type="text/css">
+.grid figure {
+  height: 155px;
+  margin-top: 30px;
+}
+.grid figure h2 span {
+  font-weight: normal;
+  font-size: 16px;
+  word-spacing: 0;
+  color: #cecece;
+  text-transform: initial;
+}
+.grid figure h2 span:first-letter {
+  text-transform: uppercase;
+}
+.first-letter-upper:first-letter {
+  text-transform: uppercase;
+}
+</style>
+
+{% if object != None %}
+
+<h2 class="first-letter-upper" style="padding-bottom: 20px;">{{ object }}</h2>
+
+<div class="media-gallery">
+<div class="row">
+  {% for object in object.files %}
+  <div class="valignContainer text-center col-lg-3 col-md-4 col-xs-6 {% if forloop.counter0|divisibleby:"4" %}no-margin{% endif %}">
+    {% thumbnail object.file.file "200x840" format="PNG" as thumb %}
+    <div class="object-cell-content centered">
+    <a class="thumbnail" data-title="{{ object.default_caption|default:'' }}" data-footer="{{ object.description|default:'' }}" data-toggle="lightbox" href="{{ object.file.url }}" rel="{{ widget.fe_identifier }}" data-gallery="multiimages">
+      <img class="img-responsive" src="{{ thumb.url }}" />
+    </a>
+    </div>
+    {% endthumbnail %}
+  </div>
+  {% endfor %}
+</div>
+</div>
+
+<div class="media-back-button">
+  <a class="btn btn-catalog" href="../">{% trans "Back to" %} {% if object.parent %}{{ object.parent }}{% else %}{{ request.webcms_page }}{% endif %}</a>
+</div>
+
+{% else %}
+<div class="object-grid ui-helper-clearfix grid">
+  {% for object in object_list %}
+  <div class="col-xs-3">
+      <figure class="effect-lily" onclick="location.href = './{{ object.name }}/';">
+        {% thumbnail object.get_featured_image.file "200x140" format="PNG" crop="center" as thumb %}
+        <img src="{{ thumb.url }}" /><br />
+        {% endthumbnail %}
+        <figcaption>
+            <div>
+                <h2><span>{{ object }}</span></h2>
+            </div>
+        </figcaption>
+      </figure>
+      <p class="objet-image-neste-template first-letter-upper" onclick="location.href = './{{ object.name }}/';">{{ object }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
