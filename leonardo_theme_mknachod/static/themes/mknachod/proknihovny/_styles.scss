@@ -46,3 +46,22 @@
     padding-left: 0;
     padding-right: 31px;
 }
+
+.proknihovny_heading {
+    position: absolute;
+    top: 76px;
+    left: 540px;
+    font-size: 35px;
+    text-align: right;
+    color: #000;
+}
+@media only screen and (max-width: 760px) {
+    .proknihovny_heading {
+        position: absolute;
+        top: -21px;
+        left: -17px;
+        font-size: 35px;
+        text-align: center;
+        color: #000;
+    }
+}
