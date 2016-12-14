@@ -73,20 +73,21 @@ figure.effect-lily h2 {
 </div>
 
 {% else %}
+<h1>Fotogalerie</h1>
 <div class="object-grid ui-helper-clearfix grid">
   {% for object in object_list|dictsort:"created_at" reversed %}
-  <div class="col-lg-3 col-md-4 col-xs-6 thumb_directory">
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb_directory {% if forloop.counter > 12 %}wow fadeInUp{% endif %}">
       <figure class="effect-lily" onclick="location.href = './{{ object.name }}/';">
         {% thumbnail object.get_featured_image.file "200x140" format="PNG" crop="center" as thumb %}
         <img src="{{ thumb.url }}" /><br />
         {% endthumbnail %}
         <figcaption>
             <div>
-                <h2><span>{{ object }}</span></h2>
+                <h2><span>{{ object.name|truncatewords:"6" }}</span></h2>
             </div>
         </figcaption>
       </figure>
-      <p class="objet-image-neste-template first-letter-upper" onclick="location.href = './{{ object.name }}/';">{{ object.name }}</p>
+      <p class="objet-image-neste-template first-letter-upper" onclick="location.href = './{{ object.name }}/';">{{ object.name|truncatechars:"40" }}</p>
   </div>
   {% endfor %}
 </div>
