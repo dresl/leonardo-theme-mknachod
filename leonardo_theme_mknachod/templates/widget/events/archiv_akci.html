@@ -3,7 +3,9 @@
 {% load leonardo_tags %}
 
 {% block content %}
-{% for item in widget.items %}
+{% for item in widget.items reversed %}
+{% if item.categories.get.slug == 'novinky-v-knihovne' or item.categories.get.slug == 'aktuality' or 'semestr' in item.slug %}
+{% else %}
 <div class="col-xs-12">
     <div class="row novinky">
         <div class="span12">
@@ -16,12 +18,17 @@
           <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p><br>
           {% if item.categories.get.slug == 'novinky-v-knihovne' %}
           {% else %}
+          {% if 'proknihovny' in request.build_absolute_uri or 'pro-knihovny' in request.build_absolute_uri %}
+          <p>Vloženo: {{ item.start_time|date:"DATE_FORMAT" }}</p>
+          {% else %}
           <p><strong>Trvání akce od {{ item.start_time }}{% if item.end_time %} do {{ item.end_time }}{% endif %}</strong></p>
+          {% endif %}
           {% endif %}
           <a class="btn btn-default pull-right" href="{{ item.get_absolute_url }}">Číst více</a>
         </div>
     </div>
 </div>
+{% endif %}
 {% endfor %}
 
 {% endblock %}

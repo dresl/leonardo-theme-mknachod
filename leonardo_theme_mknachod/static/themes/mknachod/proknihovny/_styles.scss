@@ -65,3 +65,15 @@
         color: #000;
     }
 }
+
+// pagination
+
+.pagination {
+    > li a {
+        color: #b9304d;
+    }
+    > .active > a {
+        background-color: #b9304d;
+        border-color: #b9304d;
+    }
+}

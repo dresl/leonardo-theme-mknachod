@@ -47,3 +47,15 @@
     padding-left: 0;
     padding-right: 31px;
 }
+
+// pagination
+
+.pagination {
+    > li a {
+        color: #195eb0;
+    }
+    > .active > a {
+        background-color: #195eb0;
+        border-color: #195eb0;
+    }
+}

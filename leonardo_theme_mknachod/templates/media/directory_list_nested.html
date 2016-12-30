@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load thumbnail %}
-{% load leonardo_tags %}
+{% load leonardo_tags filermedia %}
 {% block content %}
 <style type="text/css">
 .grid figure {
@@ -55,7 +55,7 @@ figure.effect-lily h2 {
 <div class="media-gallery">
 <div class="row">
   {% for object in object.files %}
-  <div class="valignContainer text-center col-lg-3 col-md-4 col-xs-6 {% if forloop.counter0|divisibleby:"4" %}no-margin{% endif %}">
+  <div class="valignContainer text-center col-lg-3 col-md-4 col-xs-6 {% if forloop.counter0|divisibleby:"4" %}no-margin{% endif %} {% if forloop.counter > 16 %}wow fadeInUp{% endif %}">
     {% thumbnail object.file.file "200x840" format="PNG" as thumb %}
     <div class="object-cell-content centered">
     <a class="thumbnail" data-title="{{ object.default_caption|default:'' }}" data-footer="{{ object.description|default:'' }}" data-toggle="lightbox" href="{{ object.file.url }}" rel="{{ widget.fe_identifier }}" data-gallery="multiimages">
@@ -69,7 +69,9 @@ figure.effect-lily h2 {
 </div>
 
 <div class="media-back-button">
-  <a class="btn btn-catalog" href="../">{% trans "Back to" %} {% if object.parent %}{{ object.parent }}{% else %}{{ request.webcms_page }}{% endif %}</a>
+  <button class="btn btn-catalog" onclick="goBack()">
+  {% trans "Back to" %} {% if object.parent %}{{ object.parent }}{% else %}{{ request.webcms_page }}{% endif %}
+  </button>
 </div>
 
 {% else %}
@@ -91,6 +93,24 @@ figure.effect-lily h2 {
   </div>
   {% endfor %}
 </div>
+<div class="col-xs-12 wow fadeInUp">
+  <ul class="pagination">
+    {% if object_list.has_previous %}
+      <li><a href="?page={{ object_list.previous_page_number }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+    {% endif %}
+    {% for object in object_list.paginator.page_range %}
+      <li class="{% if object_list.number == forloop.counter %}active{% endif %}"><a href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+    {% endfor %}
+    {% if object_list.has_next %}
+      <li><a href="?page={{ object_list.next_page_number }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+    {% endif %}
+  </ul>
+</div>
 {% endif %}
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 {% endblock %}

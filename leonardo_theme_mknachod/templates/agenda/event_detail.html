@@ -15,7 +15,7 @@
 
 <div class="col-xs-12">
     <h2>{{ object.translation.name|default:object.name }}</h2>
-    {% if object.categories.get.slug == 'novinky-v-knihovne' %}
+    {% if object.categories.get.slug == 'novinky-v-knihovne' or object.categories.get.slug == 'aktuality' %}
     {% else %}
     <p><strong>Trvání akce od {{ object.start_time }}{% if object.end_time %} do {{ object.end_time }}{% endif %}</strong></p>
     {% endif %}
@@ -27,6 +27,10 @@
           </a>
         {% endif %}
           <p>{{ object.translation.description|default:object.description|safe }}</p><br>
+          &nbsp;
+          {% if 'proknihovny' in request.build_absolute_uri or 'pro-knihovny' in request.build_absolute_uri %}
+          <p>Vloženo: {{ object.start_time }}</p>
+          {% endif %}
           <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
         </div>
     </div>
