@@ -1,0 +1,24 @@
+{% extends widget.get_base_template %}
+{% load i18n thumbnail %}
+{% load leonardo_tags %}
+
+{% block content %}
+{% for item in widget.items reversed %}
+<div class="col-xs-12">
+    <div class="row novinky">
+        <div class="span12">
+        {% if item.picture %}
+          <a href="{{ item.get_absolute_url }}">
+            <img class="event-img-preview pull-left" src="{{ item.picture.url }}" alt=""/>
+          </a>
+        {% endif %}
+          <a href="{{ item.get_absolute_url }}"><h3 class="pripravovane_akce_heading">{{ item.name }}</h3></a>
+          <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p><br>
+          <p>Vloženo: {{ item.start_time|date:"DATE_FORMAT" }}</p>
+          <a class="btn btn-default pull-right" href="{{ item.get_absolute_url }}">Číst více</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
