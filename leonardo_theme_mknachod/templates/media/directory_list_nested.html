@@ -31,10 +31,17 @@ figure.effect-lily figcaption > div {
 
 .thumbnail > img {
   max-height: 130px;
+  background: #3A6F9A;
+  vertical-align: middle;
+  max-width: 100%;
 }
 
 .valignContainer .centered {
   width: 100%;
+}
+
+.valignContainer {
+  height: 150px;
 }
 
 .thumb_directory {
@@ -84,15 +91,13 @@ figure.effect-lily h2 {
         <img src="{{ thumb.url }}" /><br />
         {% endthumbnail %}
         <figcaption>
-            <div>
-                <h2><span>{{ object.name|truncatewords:"6" }}</span></h2>
-            </div>
         </figcaption>
       </figure>
       <p class="objet-image-neste-template first-letter-upper" onclick="location.href = './{{ object.name }}/';">{{ object.name|truncatechars:"40" }}</p>
   </div>
   {% endfor %}
 </div>
+{% if object_list.paginator.num_pages != 1 %}
 <div class="col-xs-12 wow fadeInUp">
   <ul class="pagination">
     {% if object_list.has_previous %}
@@ -106,6 +111,7 @@ figure.effect-lily h2 {
     {% endif %}
   </ul>
 </div>
+{% endif %}
 {% endif %}
 <script>
 function goBack() {

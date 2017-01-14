@@ -74,5 +74,10 @@
     {% include "horizon/_scripts.html" %}
     <div id="modal_wrapper"></div>
     {% analytical_body_bottom %}
+    <script type="text/javascript">
+      $('html,body').animate({
+        scrollTop: $(location.hash).offset().top
+      }, 1000);
+    </script>
   </body>
 </html>

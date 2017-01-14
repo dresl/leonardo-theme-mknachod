@@ -98,9 +98,10 @@ div#calendar.calendar-small .fc-toolbar {
                 },
                 eventLimit: true, // allow "more" link when too many events
                 events: [
-                {% for item in widget.items %}
+                {% for item in widget.get_items %}
+                {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
-                {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
+                {% if obj.slug == 'pro-deti' and obj.slug != 'nezobrazovat-v-kalendari' or obj.slug == 'pro-dospele' and obj.slug != 'nezobrazovat-v-kalendari' or obj.slug == 'pro-vsechny' and obj.slug != 'nezobrazovat-v-kalendari' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
@@ -111,6 +112,7 @@ div#calendar.calendar-small .fc-toolbar {
                     },
                 {% endif %}
                 {% endfor %}
+                {% endif %}
                 {% endfor %}
                 ]
             });
@@ -140,19 +142,20 @@ div#calendar.calendar-small .fc-toolbar {
                     element.find('span.fc-title').html(element.find('span.fc-title').text());
                 },
                 events: [
-                {% for item in widget.items %}
+                {% for item in widget.get_items %}
+                {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
                 {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
-                        description: 'This is a cool event',
                         color: "{% for obj in item.categories.all %}{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}{% endfor %}",
                         url: '{{ item.get_absolute_url }}',
                     },
                 {% endif %}
                 {% endfor %}
+                {% endif %}
                 {% endfor %}
                 ]
             });

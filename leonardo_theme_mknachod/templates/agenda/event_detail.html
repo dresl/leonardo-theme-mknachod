@@ -15,7 +15,7 @@
 
 <div class="col-xs-12">
     <h2>{{ object.translation.name|default:object.name }}</h2>
-    {% if object.categories.get.slug == 'novinky-v-knihovne' or object.categories.get.slug == 'aktuality' %}
+    {% if object.categories.get.slug == 'novinky-v-knihovne' or object.categories.get.slug == 'aktuality' or object.categories.get.slug == 'informace' %}
     {% else %}
     <p><strong>Trvání akce od {{ object.start_time }}{% if object.end_time %} do {{ object.end_time }}{% endif %}</strong></p>
     {% endif %}
