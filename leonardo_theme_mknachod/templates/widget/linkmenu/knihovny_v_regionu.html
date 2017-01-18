@@ -1,0 +1,108 @@
+{% extends widget.get_base_template %}
+{% load staticfiles %}
+
+{% block content %}
+
+<style type="text/css">
+#{{ widget.fe_identifier }}-map {
+  width: 100%;
+  margin: 0px;
+  padding: 20px;
+  margin-top: 19px;
+  margin-left: 7px;
+}
+</style>
+
+<div id="{{ widget.fe_identifier }}-map" class="widget-maplocation-map"></div>
+
+<script type="text/javascript">
+var gmaps = gmaps || {};
+
+gmaps.initFunctions = gmaps.initFunctions || [];
+
+
+gmaps.init = gmaps.init || function (){
+
+    if(gmaps.initFunctions && gmaps.initFunctions.length > 0)
+
+    for(var i=0;i<gmaps.initFunctions.length;i++){
+
+        gmaps.initFunctions[i]();
+
+    }
+}
+
+gmaps.initFunctions[gmaps.initFunctions.length] = function(){
+
+    var canvas = $("#{{ widget.fe_identifier }}-map");
+    var location = new google.maps.LatLng(50.49, 16.14633);
+    var zoom = 10;
+
+    map_type = google.maps.MapTypeId.ROADMAP;
+
+    var options = { zoom: zoom, center: location, mapTypeId: map_type, scrollwheel: false };
+    var map = new google.maps.Map(canvas.get(0), options);
+
+    var locations = [
+    {% for item in widget.get_items %}
+      ['', {{ item.relationship.web_address }}, {{ item.relationship.translation.description }}, 4],
+    {% endfor %}
+    ];
+
+    var markers = [];
+    for (i = 0; i < locations.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: "http://maps.google.com/mapfiles/ms/micons/blue.png",
+        id: i,
+      });
+      markers.push(marker);
+    }
+
+    $.fn.changeMarker = function(id) {
+      for (i = 0; i < markers.length; i++) {
+         markers[i].setIcon('http://maps.google.com/mapfiles/ms/micons/blue.png');  
+      }
+      markers[id].setIcon('http://maps.google.com/mapfiles/ms/micons/red.png');
+    };
+
+    google.maps.event.addListener(map, 'click', function(event){
+        this.setOptions({scrollwheel:true});
+     });
+    google.maps.event.addListener(map, 'mouseout', function(event){
+            this.setOptions({scrollwheel:false});  
+    });
+
+    var widget_height = 480 + "px";
+
+    $("#{{ widget.fe_identifier }}-map").height(widget_height);
+}
+
+$(function() {
+  loadResource({src:"https://maps.googleapis.com/maps/api/js?key=AIzaSyA2dlrJ_kjJLGYz7a85ybHFvk8RGgrY02E", callback: gmaps.init});
+});
+
+</script>
+
+<h1>Profesionální knihovny okresu</h1>
+{% for item in widget.get_items %}
+<button class="btn" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name }}</button>
+{% if forloop.counter0 == 9 %}
+<h1>Obecní knihovny okresu</h1>
+<h2>Náchod</h2>
+{% endif %}
+{% if forloop.counter0 == 31 %}
+<h2>Červený Kostelec</h2>
+{% endif %}
+{% if forloop.counter0 == 37 %}
+<h2>Jaroměř</h2>
+{% endif %}
+{% if forloop.counter0 == 51 %}
+<h2>Nové Město nad Metují</h2>
+{% endif %}
+{% if forloop.counter0 == 63 %}
+<h2>Police nad Metují</h2>
+{% endif %}
+{% endfor %}
+{% endblock content %}
