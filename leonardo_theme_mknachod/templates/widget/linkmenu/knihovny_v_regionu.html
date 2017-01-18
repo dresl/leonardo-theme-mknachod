@@ -59,7 +59,7 @@ gmaps.initFunctions[gmaps.initFunctions.length] = function(){
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        icon: "http://maps.google.com/mapfiles/ms/micons/blue.png",
+        icon: "{% static 'img/marker_b.png' %}",
         id: i,
       });
       markers.push(marker);
@@ -67,9 +67,9 @@ gmaps.initFunctions[gmaps.initFunctions.length] = function(){
 
     $.fn.changeMarker = function(id) {
       for (i = 0; i < markers.length; i++) {
-         markers[i].setIcon('http://maps.google.com/mapfiles/ms/micons/blue.png');  
+         markers[i].setIcon("{% static 'img/marker_b.png' %}");  
       }
-      markers[id].setIcon('http://maps.google.com/mapfiles/ms/micons/red.png');
+      markers[id].setIcon("{% static 'img/marker_a.png' %}");
     };
 
     google.maps.event.addListener(map, 'click', function(event){
