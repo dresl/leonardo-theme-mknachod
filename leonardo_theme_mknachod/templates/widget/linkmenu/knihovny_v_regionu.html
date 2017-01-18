@@ -11,6 +11,10 @@
   margin-top: 19px;
   margin-left: 7px;
 }
+
+.hiddendiv {
+  display: none;
+}
 </style>
 
 <div id="{{ widget.fe_identifier }}-map" class="widget-maplocation-map"></div>
@@ -85,9 +89,22 @@ $(function() {
 
 </script>
 
+{% for item in widget.get_items %}
+<h2 id="visible-h2-{{ item.id }}" class="hiddendiv">{{ item.translation.name }}</h2>
+<div id="visible-div-{{ item.id }}" class="hiddendiv">{{ item.translation.description|safe }}</div>
+{% endfor %}
+
 <h1>Profesionální knihovny okresu</h1>
 {% for item in widget.get_items %}
-<button class="btn" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name }}</button>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% if forloop.counter0 == 9 %}
 <h1>Obecní knihovny okresu</h1>
 <h2>Náchod</h2>
@@ -105,4 +122,14 @@ $(function() {
 <h2>Police nad Metují</h2>
 {% endif %}
 {% endfor %}
+
+<script type="text/javascript">
+// jQuery for page scrolling feature - requires jQuery Easing plugin
+$('.btn.page-scroll').bind('click', function(event) {
+    $('html, body').stop().animate({
+        scrollTop: ($("#{{ widget.fe_identifier }}-map").offset().top)
+    }, 500);
+    event.preventDefault();
+});
+</script>
 {% endblock content %}
