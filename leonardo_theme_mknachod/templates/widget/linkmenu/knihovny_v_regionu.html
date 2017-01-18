@@ -6,14 +6,15 @@
 <style type="text/css">
 #{{ widget.fe_identifier }}-map {
   width: 100%;
-  margin: 0px;
-  padding: 20px;
-  margin-top: 19px;
-  margin-left: 7px;
+  margin-top: 15px;
 }
 
 .hiddendiv {
   display: none;
+}
+
+.image-knihreg {
+  cursor: pointer;
 }
 </style>
 
@@ -91,7 +92,33 @@ $(function() {
 
 {% for item in widget.get_items %}
 <h2 id="visible-h2-{{ item.id }}" class="hiddendiv">{{ item.translation.name }}</h2>
-<div id="visible-div-{{ item.id }}" class="hiddendiv">{{ item.translation.description|safe }}</div>
+<div id="visible-div-{{ item.id }}" class="hiddendiv container">
+  <div class="col-xs-8">
+    {{ item.translation.description|safe }}
+  </div>
+  <div class="col-xs-4">
+    <a type="button" data-toggle="modal" data-target="#modal{{ item.image.id }}">
+      <img src="{{ item.image.url }}" alt="" class="img-responsive image-knihreg" />
+    </a>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal{{ item.image.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ item.translation.name|safe }}</h4>
+      </div>
+      <div class="modal-body">
+        <img width="100%" src="{{ item.image.url }}" alt=""/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endfor %}
 
 <h1>Profesionální knihovny okresu</h1>
