@@ -4,13 +4,15 @@
 
 {% block content %}
 {% for item in widget.items reversed %}
+{% if forloop.counter <= widget.objects_per_page %}
 <div class="row">
     <div class="col-xs-12">
         <a href="{{ item.get_absolute_url }}"><h3 class="pripravovane_akce_heading">{{ item.name }}<small class="small_text">{{ item.start_time|date:"SHORT_DATE_FORMAT" }}</small></h3></a>
-        <p>{{ item.translation.short_description|default:item.short_description|safe }}</p>
+        <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p>
         <a class="btn btn-default" href="{{ item.get_absolute_url }}">Číst více</a>
     </div>
 </div>
+{% endif %}
 {% endfor %}
 
 {% endblock %}
