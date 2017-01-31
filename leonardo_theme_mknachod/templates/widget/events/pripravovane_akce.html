@@ -3,7 +3,7 @@
 {% load leonardo_tags %}
 
 {% block content %}
-{% for item in widget.items reversed %}
+{% for item in get_items %}
 {% if forloop.counter <= widget.objects_per_page %}
 <div class="row">
     <div class="col-xs-12">

@@ -98,7 +98,7 @@ div#calendar.calendar-small .fc-toolbar {
                 },
                 eventLimit: true, // allow "more" link when too many events
                 events: [
-                {% for item in widget.get_items %}
+                {% for item in get_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
                 {% if obj.slug == 'pro-deti' and obj.slug != 'nezobrazovat-v-kalendari' or obj.slug == 'pro-dospele' and obj.slug != 'nezobrazovat-v-kalendari' or obj.slug == 'pro-vsechny' and obj.slug != 'nezobrazovat-v-kalendari' %}
@@ -142,7 +142,7 @@ div#calendar.calendar-small .fc-toolbar {
                     element.find('span.fc-title').html(element.find('span.fc-title').text());
                 },
                 events: [
-                {% for item in widget.get_items %}
+                {% for item in get_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
                 {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}

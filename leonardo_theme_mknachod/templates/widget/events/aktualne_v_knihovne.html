@@ -3,9 +3,8 @@
 
 {% block content %}
 {% block items %}
-{% for row in widget.get_rows %}
 <div class="row">
-    {% for item in row reversed %}
+{% for item in get_items %}
     {% if forloop.counter <= widget.objects_per_page %}
     <a href="{{ item.get_absolute_url }}">
         <div class="col-xs-12 col-md-4 aktual_knihovna">
@@ -14,8 +13,7 @@
         </div>
     </a>
     {% endif %}
-    {% endfor %}
-</div>
 {% endfor %}
+</div>
 {% endblock %}
 {% endblock %}
