@@ -98,9 +98,10 @@ div#calendar.calendar-small .fc-toolbar {
                 },
                 eventLimit: true, // allow "more" link when too many events
                 events: [
-                {% for item in get_items %}
+                {% for item in get_calendar_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
+                {% if forloop.counter == 1 %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
@@ -109,6 +110,7 @@ div#calendar.calendar-small .fc-toolbar {
                         color: "{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
+                {% endif %}
                 {% endfor %}
                 {% endif %}
                 {% endfor %}
@@ -140,9 +142,10 @@ div#calendar.calendar-small .fc-toolbar {
                     element.find('span.fc-title').html(element.find('span.fc-title').text());
                 },
                 events: [
-                {% for item in get_items %}
+                {% for item in get_calendar_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
+                {% if forloop.counter == 1 %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
@@ -150,6 +153,7 @@ div#calendar.calendar-small .fc-toolbar {
                         color: "{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
+                {% endif %}
                 {% endfor %}
                 {% endif %}
                 {% endfor %}
