@@ -101,7 +101,7 @@ div#calendar.calendar-small .fc-toolbar {
                 {% for item in get_calendar_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
-                {% if forloop.counter == 1 %}
+                {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
@@ -145,7 +145,7 @@ div#calendar.calendar-small .fc-toolbar {
                 {% for item in get_calendar_items %}
                 {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
-                {% if forloop.counter == 1 %}
+                {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
@@ -160,7 +160,6 @@ div#calendar.calendar-small .fc-toolbar {
                 ]
             });
         }
-        
     });
 
 </script>
