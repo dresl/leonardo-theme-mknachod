@@ -9,11 +9,11 @@
     height: auto;
     min-width: 380px;
     padding: 16px;
-    border: 1px solid #666;
+    border: 1px solid #dedede;
     border-radius: 3px;
-    background-color: #f7f7f7;
+    box-shadow: 0px 0px 12px 0px #b9b9b9;
+    background-color: #ffffff;
     z-index: 9999;
-    display: none;
 }
 
 /* fullcalendar */
@@ -87,7 +87,7 @@ div#calendar.calendar-small .fc-toolbar {
                             "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
                             "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
                             );
-                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(200);
+                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(0);
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
@@ -126,7 +126,7 @@ div#calendar.calendar-small .fc-toolbar {
                             "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
                             "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
                             );
-                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(200);
+                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(0);
                 },
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
