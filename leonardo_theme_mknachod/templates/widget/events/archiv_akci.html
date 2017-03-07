@@ -3,9 +3,7 @@
 {% load leonardo_tags %}
 
 {% block content %}
-{% for item in get_items %}
-{% if item.categories.get.slug == 'novinky-v-knihovne' or item.categories.get.slug == 'aktuality' or 'semestr' in item.slug %}
-{% else %}
+{% for item in get_events_actions %}
 <div class="col-xs-12">
     <div class="row novinky">
         <div class="span12">
@@ -28,20 +26,19 @@
         </div>
     </div>
 </div>
-{% endif %}
 {% endfor %}
 
-{% if get_items.paginator.num_pages != 1 %}
+{% if get_events_actions.paginator.num_pages != 1 %}
 <div class="col-xs-12">
   <ul class="pagination">
-    {% if get_items.has_previous %}
-      <li><a href="?page={{ get_items.previous_page_number }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+    {% if get_events_actions.has_previous %}
+      <li><a href="?page={{ get_events_actions.previous_page_number }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
     {% endif %}
-    {% for object in get_items.paginator.page_range %}
-      <li class="{% if get_items.number == forloop.counter %}active{% endif %}"><a href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+    {% for object in get_events_actions.paginator.page_range %}
+      <li class="{% if get_events_actions.number == forloop.counter %}active{% endif %}"><a href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
     {% endfor %}
-    {% if get_items.has_next %}
-      <li><a href="?page={{ get_items.next_page_number }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+    {% if get_events_actions.has_next %}
+      <li><a href="?page={{ get_events_actions.next_page_number }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
     {% endif %}
   </ul>
 </div>

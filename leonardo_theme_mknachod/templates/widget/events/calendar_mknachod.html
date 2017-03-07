@@ -92,14 +92,9 @@ div#calendar.calendar-small .fc-toolbar {
                 eventMouseout: function (calEvent, jsEvent, view) {
                     $(".bubble").hide();
                 },
-                dayClick: function (calEvent, jsEvent, view) {
-                    document.location.href = window.location.protocol + "//" + window.location.host + "/cs/akce/kalendar/";
-                    
-                },
                 eventLimit: true, // allow "more" link when too many events
                 events: [
                 {% for item in get_calendar_items %}
-                {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
                 {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
@@ -112,7 +107,6 @@ div#calendar.calendar-small .fc-toolbar {
                     },
                 {% endif %}
                 {% endfor %}
-                {% endif %}
                 {% endfor %}
                 ]
             });
@@ -143,7 +137,6 @@ div#calendar.calendar-small .fc-toolbar {
                 },
                 events: [
                 {% for item in get_calendar_items %}
-                {% if item.show_in_calendar == True %}
                 {% for obj in item.categories.all %}
                 {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
@@ -155,7 +148,6 @@ div#calendar.calendar-small .fc-toolbar {
                     },
                 {% endif %}
                 {% endfor %}
-                {% endif %}
                 {% endfor %}
                 ]
             });
