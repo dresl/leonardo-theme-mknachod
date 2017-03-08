@@ -1,44 +1,44 @@
 {% extends widget.get_base_template %}
 {% load i18n thumbnail %}
-{% load leonardo_tags %}
+{% load leonardo_tags extra %}
 
 {% block content %}
-{% for item in get_items %}
-  {% for obj in item.categories.all %}
-    {% if 'semestr' in obj.slug and item.categories.count == 2 %}
-    <button type="button" class="btn btn-semestr btn-{{ obj.id }}">{{ obj.name }}</button><br>
-    {% endif %}
-    {% if 'semestr' in obj.slug %}
-      <div class="col-xs-12 event-{{ item.id }} collapse">
-          <div class="semestr-content">
-              <h5 class="semestr-heading" data-toggle="modal" data-target="#modal{{ item.id }}">{{ item.translation.name|default:item.name }}</h5>
-          </div>
+{% for semester in get_semester_names %}
+
+<button type="button" class="btn btn-semestr btn-{{ semester.id }}">{{ semester.name }}</button><br>
+
+{% for item in get_semester_events %}
+{% if item|has_category:semester.slug %}
+<div class="col-xs-12 event-{{ item.id }} collapse">
+  <div class="semestr-content">
+    <h5 class="semestr-heading" data-toggle="modal" data-target="#modal{{ item.id }}">{{ item.translation.name|default:item.name }}</h5>
+  </div>
+</div>
+
+<div class="modal fade" id="modal{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">{{ item.translation.name|default:item.name }}</h3>
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="modal{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h3 class="modal-title" id="myModalLabel">{{ item.translation.name|default:item.name }}</h3>
-            </div>
-            <div class="modal-body">
-              {{ item.translation.description|default:item.description|safe }}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
-            </div>
-          </div>
-        </div>
+      <div class="modal-body">
+        {{ item.translation.description|default:item.description|safe }}
       </div>
-      <script>
-      $(document).ready(function(){
-          $(".btn-semestr.btn-{{ obj.id }}").click(function(){
-              $(".event-{{ item.id }}.collapse").collapse('toggle');
-          });
-      });
-      </script>
-    {% endif %}
-  {% endfor %}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+    $(".btn-semestr.btn-{{ semester.id }}").click(function(){
+        $(".event-{{ item.id }}.collapse").collapse('toggle');
+    });
+});
+</script>
+{% endif %}
+{% endfor %}
 {% endfor %}
 {% endblock %}

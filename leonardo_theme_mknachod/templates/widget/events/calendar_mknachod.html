@@ -1,5 +1,5 @@
 {% extends widget.get_base_template %}
-{% load i18n thumbnail %}
+{% load i18n thumbnail staticfiles extra %}
 
 {% block content %}
 <style type="text/css">
@@ -95,18 +95,13 @@ div#calendar.calendar-small .fc-toolbar {
                 eventLimit: true, // allow "more" link when too many events
                 events: [
                 {% for item in get_calendar_items %}
-                {% for obj in item.categories.all %}
-                {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
-                        description: 'This is a cool event',
-                        color: "{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}",
+                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
-                {% endif %}
-                {% endfor %}
                 {% endfor %}
                 ]
             });
@@ -137,17 +132,13 @@ div#calendar.calendar-small .fc-toolbar {
                 },
                 events: [
                 {% for item in get_calendar_items %}
-                {% for obj in item.categories.all %}
-                {% if obj.slug == 'pro-deti' or obj.slug == 'pro-dospele' or obj.slug == 'pro-vsechny' %}
                     {
                         title: '{{ item.translation.name|default:item.name }}',
                         start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
                         end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
-                        color: "{% if obj.slug == 'pro-deti' %}#F0542B{% elif obj.slug == 'pro-dospele' %}#82B421{% elif obj.slug == 'pro-vsechny' %}#195EB0{%endif%}",
+                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
                         url: '{{ item.get_absolute_url }}',
                     },
-                {% endif %}
-                {% endfor %}
                 {% endfor %}
                 ]
             });
