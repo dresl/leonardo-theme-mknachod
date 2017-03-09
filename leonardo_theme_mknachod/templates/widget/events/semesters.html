@@ -3,7 +3,7 @@
 {% load leonardo_tags extra %}
 
 {% block content %}
-{% for semester in get_semester_names %}
+{% for semester in get_semester_names reversed %}
 
 <button type="button" class="btn btn-semestr btn-{{ semester.id }}">{{ semester.name }}</button><br>
 
