@@ -53,10 +53,123 @@ div#calendar.calendar-small .fc-content {
 div#calendar.calendar-small .fc-toolbar {
     padding-bottom: 10px;
 }
+
+.block-loading-message {
+    position: absolute;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.65);
+    border: #ececec solid 1px;
+    top: 60px;
+    z-index: 5;
+    box-shadow: 0px 0px 4px 1px #f3f3f3;
+}
+ 
+.block-loading-message:before {
+    content: '\200B';
+    display: inline-block;
+    height: 100%; 
+    vertical-align: middle;
+ }
+ 
+.centered-loading-message {
+    display: inline-block;
+    font-size: 18px;
+}
 </style>
 <script>
     $(document).ready(function() {
 
+        $('#calendar').fullCalendar({
+            header: {
+                titleFormat: 'MMMM D YYYY',
+                left: 'prev',
+                center: 'title',
+                right: 'next',
+            },
+            locale: "cs",
+            firstDay: 1,
+            eventMouseover: function (calEvent, jsEvent, view) {
+
+                $(".bubble").html(
+                        "<p>Název události: <strong>" + calEvent.title + "</strong></p>" +
+                        "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
+                        "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
+                        );
+                $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(0);
+            },
+            eventMouseout: function (calEvent, jsEvent, view) {
+                $(".bubble").hide();
+            },
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+            {% for item in get_calendar_items_on_load %}
+                {
+                    title: '{{ item.translation.name|default:item.name }}',
+                    start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
+                    end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
+                    color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
+                    url: '{{ item.get_absolute_url }}',
+                },
+            {% endfor %}
+            ]
+        });
+        function GetCurrentDisplayedMonth() { 
+            var date = new Date($('#calendar').fullCalendar('getDate'));
+            var month_int = date.getMonth();
+            return month_int; 
+        }
+        var date_now = new Date();
+        var current_month = date_now.getMonth();
+        $('.fc-prev-button.fc-corner-left').click(function(){
+            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 4 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 8 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9) {
+            } else if ($('.fc-prev-button.fc-corner-left').hasClass('updated')){
+            } else {
+            var height_block = $('.fc-view-container').height();
+            var width_block = $('#calendar').width();
+            $('.block-loading-message').css('width', width_block);
+            $('.block-loading-message').css('height', height_block);
+            $('.block-loading-message').css('display', 'block');
+            setTimeout(function(){
+            {% for item in get_all_calendar_items %}
+            var new_event = {
+                        title: '{{ item.translation.name|default:item.name }}',
+                        start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
+                        end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
+                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
+                        url: '{{ item.get_absolute_url }}',
+                    };
+            $('#calendar').fullCalendar('renderEvent', new_event, true);
+            {% endfor %}
+            $('.fc-prev-button.fc-corner-left').addClass('updated')
+            }, 10);
+            }
+            setTimeout(function(){
+            $('.block-loading-message').css('display', 'none');
+            }, 100);
+        });
+        $('.fc-next-button.fc-corner-right').click(function(){
+            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 4 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 8 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9) {
+            } else if ($('.fc-prev-button.fc-corner-left').hasClass('updated')){
+            } else {
+            $('.block-loading-message').css('display', 'block');
+            setTimeout(function(){
+            {% for item in get_all_calendar_items %}
+            var new_event = {
+                        title: '{{ item.translation.name|default:item.name }}',
+                        start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
+                        end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
+                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
+                        url: '{{ item.get_absolute_url }}',
+                    };
+            $('#calendar').fullCalendar('renderEvent', new_event, true);
+            {% endfor %}
+            $('.fc-prev-button.fc-corner-left').addClass('updated')
+            }, 1);
+            }
+            setTimeout(function(){
+            $('.block-loading-message').css('display', 'none');
+            }, 100);
+        });
         if ($('#calendar').width() < 500){
             function SmallTitleOfCalendar() {
                 var list = document.getElementsByClassName("fc-center")[0];
@@ -79,32 +192,9 @@ div#calendar.calendar-small .fc-toolbar {
                     right: 'next',
                 },
                 height: 300,
-                locale: "cs",
-                firstDay: 1,
-                eventMouseover: function (calEvent, jsEvent, view) {
-
-                    $(".bubble").html(
-                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>" +
-                            "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
-                            "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
-                            );
-                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(0);
+                eventRender: function (event, element) {
+                    element.find('span.fc-title').html(element.find('span.fc-title').text());
                 },
-                eventMouseout: function (calEvent, jsEvent, view) {
-                    $(".bubble").hide();
-                },
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                {% for item in get_calendar_items %}
-                    {
-                        title: '{{ item.translation.name|default:item.name }}',
-                        start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
-                        end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
-                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
-                        url: '{{ item.get_absolute_url }}',
-                    },
-                {% endfor %}
-                ]
             });
         } else {
             $('#calendar').fullCalendar({
@@ -113,41 +203,18 @@ div#calendar.calendar-small .fc-toolbar {
                     center: 'title',
                     right: 'month,basicWeek,basicDay,'
                 },
-                locale: "cs",
-                firstDay: 1,
-                eventMouseover: function (calEvent, jsEvent, view) {
-
-                    $(".bubble").html(
-                            "<p>Název události: <strong>" + calEvent.title + "</strong></p>" +
-                            "<p>Začátek: " + calEvent.start.format("DD.MM. YYYY") + "</p>" +
-                            "<p>Konec: " + calEvent.end.format("DD.MM. YYYY") + "</p>"
-                            );
-                    $(".bubble").css({ top: jsEvent.pageY + 20, left: jsEvent.pageX + 20}).show(0);
-                },
-                eventMouseout: function (calEvent, jsEvent, view) {
-                    $(".bubble").hide();
-                },
-                eventLimit: true, // allow "more" link when too many events
                 eventRender: function (event, element) {
                     element.find('span.fc-title').html(element.find('span.fc-title').text());
                 },
-                events: [
-                {% for item in get_calendar_items %}
-                    {
-                        title: '{{ item.translation.name|default:item.name }}',
-                        start: '{{ item.start_time.year }}-{{ item.start_time|date:"m-d" }}T{{ item.start_time|time:"H:i" }}',
-                        end: '{{ item.end_time.year }}-{{ item.end_time|date:"m-d" }}T{{ item.end_time|time:"H:i" }}',
-                        color: "{% if item|has_category:'pro-deti' %}#F0542B{% elif item|has_category:'pro-dospele' %}#82B421{% elif item|has_category:'pro-vsechny' %}#195EB0{%endif%}",
-                        url: '{{ item.get_absolute_url }}',
-                    },
-                {% endfor %}
-                ]
             });
         }
     });
 
 </script>
-<div id='calendar'></div>
+<div id="calendar"></div>
+<div style="display: none" class="block-loading-message">
+    <div class="centered-loading-message">Načítání událostí ...</div>
+</div>
 <script type="text/javascript">
     $("body").append("<div class='bubble'></div>")
 </script>
