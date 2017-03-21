@@ -151,6 +151,10 @@ div#calendar.calendar-small .fc-toolbar {
             if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 4 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 8 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9) {
             } else if ($('.fc-prev-button.fc-corner-left').hasClass('updated')){
             } else {
+            var height_block = $('.fc-view-container').height();
+            var width_block = $('#calendar').width();
+            $('.block-loading-message').css('width', width_block);
+            $('.block-loading-message').css('height', height_block);
             $('.block-loading-message').css('display', 'block');
             setTimeout(function(){
             {% for item in get_all_calendar_items %}
@@ -164,7 +168,7 @@ div#calendar.calendar-small .fc-toolbar {
             $('#calendar').fullCalendar('renderEvent', new_event, true);
             {% endfor %}
             $('.fc-prev-button.fc-corner-left').addClass('updated')
-            }, 1);
+            }, 10);
             }
             setTimeout(function(){
             $('.block-loading-message').css('display', 'none');
