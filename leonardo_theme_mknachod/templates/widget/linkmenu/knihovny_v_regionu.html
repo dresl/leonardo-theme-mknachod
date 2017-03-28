@@ -120,9 +120,9 @@ $(function() {
   </div>
 </div>
 {% endfor %}
-
+{% for item in widget.get_items|dictsort:"translation.name" %}
+{% if item.ordering == 0 and item.web_address == '-' %}
 <h1>Profesionální knihovny okresu</h1>
-{% for item in widget.get_items %}
 <button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
 <script type="text/javascript">
 $("#showButton{{ item.id }}").click(function () {
@@ -132,21 +132,127 @@ $("#showButton{{ item.id }}").click(function () {
   $("#visible-div-{{ item.id }}").show();
 });
 </script>
-{% if forloop.counter0 == 9 %}
+{% elif item.ordering == 0 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% endif %}
+{% if item.ordering == 1 and item.web_address == '-' %}
 <h1>Obecní knihovny okresu</h1>
 <h2>Náchod</h2>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% elif item.ordering == 1 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% endif %}
-{% if forloop.counter0 == 31 %}
+{% if item.ordering == 2 and item.web_address == '-' %}
 <h2>Červený Kostelec</h2>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% elif item.ordering == 2 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% endif %}
-{% if forloop.counter0 == 37 %}
+{% if item.ordering == 3 and item.web_address == '-' %}
 <h2>Jaroměř</h2>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% elif item.ordering == 3 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% endif %}
-{% if forloop.counter0 == 51 %}
+{% if item.ordering == 4 and item.web_address == '-' %}
 <h2>Nové Město nad Metují</h2>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% elif item.ordering == 4 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% endif %}
-{% if forloop.counter0 == 63 %}
+{% if item.ordering == 5 and item.web_address == '-' %}
 <h2>Police nad Metují</h2>
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
+{% elif item.ordering == 5 %}
+<button class="btn page-scroll" id="showButton{{ item.id }}" onClick="$(this).changeMarker({{ forloop.counter0 }});">{{ item.translation.name|linebreaksbr }}</button>
+<script type="text/javascript">
+$("#showButton{{ item.id }}").click(function () {
+  $('[id*="visible-div"]').hide();
+  $('[id*="visible-h2"]').hide();
+  $("#visible-h2-{{ item.id }}").show();
+  $("#visible-div-{{ item.id }}").show();
+});
+</script>
 {% endif %}
 {% endfor %}
 
