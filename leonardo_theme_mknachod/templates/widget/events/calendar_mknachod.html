@@ -78,14 +78,38 @@ div#calendar.calendar-small .fc-toolbar {
 </style>
 <script>
     $(document).ready(function() {
-
-        $('#calendar').fullCalendar({
-            header: {
+        if ($('div#calendar').width() < 500){
+            function SmallTitleOfCalendar() {
+                var list = document.getElementsByClassName("fc-center")[0];
+                list.getElementsByTagName("H2")[0].style.fontSize="17px";
+                list.getElementsByTagName("H2")[0].style.marginTop="7px";
+            }
+            function DetectContainerCalendar() {
+                var selected_div = document.getElementById('calendar');
+                selected_div.classList.add('calendar-small');
+            }
+            window.onload = function () {
+                DetectContainerCalendar();
+                SmallTitleOfCalendar();
+            }
+            var header = {
                 titleFormat: 'MMMM D YYYY',
                 left: 'prev',
                 center: 'title',
                 right: 'next',
-            },
+            };
+            var height = 300;
+        } else {
+            var header = {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay,'
+            };
+            var height = 100 + '%';
+        }
+        $('#calendar').fullCalendar({
+            header: header,
+            height: height,
             locale: "cs",
             firstDay: 1,
             eventMouseover: function (calEvent, jsEvent, view) {
@@ -101,6 +125,9 @@ div#calendar.calendar-small .fc-toolbar {
                 $(".bubble").hide();
             },
             eventLimit: true, // allow "more" link when too many events
+            eventRender: function (event, element) {
+                element.find('span.fc-title').html(element.find('span.fc-title').text());
+            },
             events: [
             {% for item in get_calendar_items_on_load %}
                 {
@@ -174,44 +201,6 @@ div#calendar.calendar-small .fc-toolbar {
             $('.block-loading-message').css('display', 'none');
             }, 100);
         });
-        if ($('#calendar').width() < 500){
-            function SmallTitleOfCalendar() {
-                var list = document.getElementsByClassName("fc-center")[0];
-                list.getElementsByTagName("H2")[0].style.fontSize="17px";
-                list.getElementsByTagName("H2")[0].style.marginTop="7px";
-            }
-            function DetectContainerCalendar() {
-                var selected_div = document.getElementById('calendar');
-                selected_div.classList.add('calendar-small');
-            }
-            window.onload = function () {
-                DetectContainerCalendar();
-                SmallTitleOfCalendar();
-            }
-            $('#calendar').fullCalendar({
-                header: {
-                    titleFormat: 'MMMM D YYYY',
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next',
-                },
-                height: 300,
-                eventRender: function (event, element) {
-                    element.find('span.fc-title').html(element.find('span.fc-title').text());
-                },
-            });
-        } else {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay,'
-                },
-                eventRender: function (event, element) {
-                    element.find('span.fc-title').html(element.find('span.fc-title').text());
-                },
-            });
-        }
     });
 
 </script>

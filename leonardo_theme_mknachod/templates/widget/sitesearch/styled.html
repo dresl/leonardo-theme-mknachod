@@ -1,0 +1,28 @@
+{% extends widget.get_base_template %}
+
+{% load i18n staticfiles %}
+{% load leonardo_tags %}
+
+{% block content %}
+<div class="navbar-collapse collapse navbar-form navbar-left">
+    <div class="input-group">
+        <input type="text" placeholder="{% trans "Search" %}" class="form-control" id="google-search-input">
+        <span class="input-group-btn">
+            <button onclick="searchByGoogle();" id="google-search-button" class="btn btn-default" type="submit"><i class=" fa fa-search" aria-hidden="true"></i></button>
+        </span>
+    </div>
+</div>
+<script type="text/javascript">
+function searchByGoogle(){
+    var url = $('#google-search-input').val();
+    url = url.replace(/\s+/g, '+');
+    url = "https://www.google.cz/#q="+url+"+site:mknachod.cz";
+    window.open(url,'_blank');
+}
+$("#google-search-input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#google-search-button").click();
+    }
+});
+</script>
+{% endblock %}
