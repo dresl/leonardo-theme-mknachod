@@ -9,7 +9,9 @@
         <div class="span12">
         {% if item.picture %}
           <a href="{{ item.get_absolute_url }}">
-            <img class="event-img-preview pull-left" src="{{ item.picture.url }}" alt=""/>
+            {% thumbnail item.picture.file "x300" format="PNG" as image %}
+            <img class="event-img-preview pull-left" src="{{ image.url }}" alt=""/>
+            {% endthumbnail %}
           </a>
         {% endif %}
           <a href="{{ item.get_absolute_url }}"><h3 class="pripravovane_akce_heading">{{ item.name }}</h3></a>

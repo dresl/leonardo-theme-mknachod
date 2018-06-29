@@ -11,7 +11,9 @@
         <div class="span12">
         {% if item.picture %}
           <a href="{{ item.get_absolute_url }}">
-            <img class="event-img-preview pull-left" src="{{ item.picture.url }}" alt=""/>
+            {% thumbnail item.picture.file "x350" format="PNG" as image %}
+            <img class="event-img-preview pull-left" src="{{ image.url }}" alt=""/>
+            {% endthumbnail %}
           </a>
         {% endif %}
           <p>{{ item.translation.short_description|default:item.short_description|safe|truncatewords:31 }}</p><br>

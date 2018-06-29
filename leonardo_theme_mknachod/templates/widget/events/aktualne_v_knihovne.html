@@ -8,7 +8,11 @@
     {% if forloop.counter <= widget.objects_per_page %}
     <a href="{{ item.get_absolute_url }}">
         <div class="col-xs-12 col-md-4 aktual_knihovna">
-            {% if item.picture %}<img class="img-responsive" style="max-height: 150px; max-width: 190px;" src="{{ item.picture.url }}" alt="" />{% endif %}
+            {% if item.picture %}
+            {% thumbnail item.picture.file "x300" format="PNG" as image %}
+            <img class="img-responsive" style="max-height: 150px; max-width: 190px;" src="{{ image.url }}" alt=""/>
+            {% endthumbnail %}
+            {% endif %}
             <h4 style="font-size: 18px;">{{ item.translation.name|default:item.name }}</h4>
         </div>
     </a>

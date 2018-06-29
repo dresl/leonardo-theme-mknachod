@@ -23,7 +23,9 @@
         <div class="span12">
         {% if object.picture %}
           <a type="button" data-toggle="modal" data-target="#modal{{ object.picture.id }}">
-            <img class="event-img pull-left" src="{{ object.picture.url }}" alt=""/>
+            {% thumbnail object.picture.file "x600" format="PNG" as image %}
+            <img class="event-img pull-left" src="{{ image.url }}" alt=""/>
+            {% endthumbnail %}
           </a>
         {% endif %}
           <p>{{ object.translation.description|default:object.description|safe }}</p><br>
