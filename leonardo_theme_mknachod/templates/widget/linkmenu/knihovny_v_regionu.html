@@ -22,7 +22,6 @@
 </style>
 
 <div id="{{ widget.fe_identifier }}-map" class="widget-maplocation-map"></div>
-
 <script type="text/javascript">
 var gmaps = gmaps || {};
 
@@ -51,9 +50,18 @@ gmaps.initFunctions[gmaps.initFunctions.length] = function(){
     var options = { zoom: zoom, center: location, mapTypeId: map_type, scrollwheel: false };
     var map = new google.maps.Map(canvas.get(0), options);
 
+    function removeParagraphFromString(string) {
+      string.replace("<p>", "").replace("\u003C/p\u003E\u000D\u000A", "");
+      return string;
+    }
+
+    {% for item in widget.get_items reversed %}
+    var LONGTITUDE_ITEM_{{ item.id }} = "{{ item.relationship.translation.description|escapejs|safe }}".replace("\u003Cp\u003E","").replace("\u003C/p\u003E\u000D\u000A","");
+    {% endfor %}
+
     var locations = [
-    {% for item in widget.get_items %}
-      ['', {{ item.relationship.web_address }}, {{ item.relationship.translation.description }}, 4],
+    {% for item in widget.get_items reversed %}
+      ['', {{ item.relationship.web_address }}, LONGTITUDE_ITEM_{{ item.id }}, 4],
     {% endfor %}
     ];
 

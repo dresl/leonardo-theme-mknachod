@@ -148,7 +148,7 @@ div#calendar.calendar-small .fc-toolbar {
         var date_now = new Date();
         var current_month = date_now.getMonth();
         $('.fc-prev-button.fc-corner-left').click(function(){
-            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 4 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 8 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9) {
+            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 1 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 10) {
             } else if ($('.fc-prev-button.fc-corner-left').hasClass('updated')){
             } else {
             var height_block = $('.fc-view-container').height();
@@ -175,7 +175,7 @@ div#calendar.calendar-small .fc-toolbar {
             }, 100);
         });
         $('.fc-next-button.fc-corner-right').click(function(){
-            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 4 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 8 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9) {
+            if (Math.abs(GetCurrentDisplayedMonth()-current_month) <= 2 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 9 || Math.abs(GetCurrentDisplayedMonth()-current_month) == 10) {
             } else if ($('.fc-prev-button.fc-corner-left').hasClass('updated')){
             } else {
             var height_block = $('.fc-view-container').height();
