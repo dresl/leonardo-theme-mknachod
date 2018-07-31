@@ -1,0 +1,26 @@
+{% extends widget.get_base_template %}
+{% load i18n thumbnail %}
+{% load leonardo_tags %}
+
+{% block content %}
+<style type="text/css">
+.left-menu-event .title {
+    font-size: 15px;
+    margin-bottom: 15px;
+    display: block;
+    color: #191919;
+}
+.left-menu-event .small_text {
+    margin-top: 0px;
+    margin-bottom: 14px;
+}
+.left-menu-event .title:hover {
+    text-decoration: underline;
+}
+</style>
+{% for item in get_items %}
+  <div class="col-xs-12 left-menu-event">
+      <a class="title" href="{{ item.get_absolute_url }}">{{ item.name }}<small class="small_text">{{ item.start_time|date:"d.m. Y" }}</small></a>
+  </div>
+{% endfor %}
+{% endblock %}
