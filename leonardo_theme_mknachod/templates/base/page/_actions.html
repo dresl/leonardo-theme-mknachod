@@ -37,9 +37,11 @@
 
 <a class="btn btn-primary btn-sm btn-block" target="_blank" href="{% url 'admin:index' %}" data-toggle="tooltip" title="{% trans 'Admin' %}"><i class="fa fa-tachometer"></i> {% trans 'Admin' %}</a>
 </div>
+{% if request.user.username == "mknachod" %}
 <script type="text/javascript">
 $(function() {
 $('div.btn-group.btn-group-justified[style*="margin-top: 5px;"]').hide()
 });
 </script>
+{% endif %}
 {% endif %}
